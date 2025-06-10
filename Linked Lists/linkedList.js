@@ -45,13 +45,39 @@ class LinkedList {
       console.log(currentNode.value);
     }
   }
+
+  size() {
+    if (this.head === null) return 0;
+    let sizeNumber = 1;
+    let currentNode = this.head;
+    while (currentNode.next) {
+      currentNode = currentNode.next;
+      sizeNumber++;
+    }
+    return sizeNumber;
+  }
+
+  getHead() {
+    return this.head;
+  }
+
+  getTail() {
+    if (this.head === null) return null;
+    let currentNode = this.head;
+    while (currentNode.next) {
+      currentNode = currentNode.next;
+    }
+    return currentNode;
+  }
 }
 
 const list = new LinkedList();
 list.append("dog");
-list.prepend("cat");
+list.append("cat");
 list.append("parrot");
-list.prepend("hamster");
+list.append("hamster");
 // list.append("snake");
 // list.append("turtle");
-list.print();
+console.log(list.size());
+console.log(list.getTail());
+// list.print();
