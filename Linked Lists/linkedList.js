@@ -1,5 +1,5 @@
 class Node {
-  constructor(value, next) {
+  constructor(value) {
     this.value = value;
     this.next = null;
   }
@@ -25,6 +25,18 @@ class LinkedList {
     currentNode.next = node;
     return this;
   }
+
+  prepend(value) {
+    let newNode = new Node(value);
+    if (this.head === null) {
+      this.head = newNode;
+      return this;
+    }
+    newNode.next = this.head;
+    this.head = newNode;
+    return this;
+  }
+
   print() {
     let currentNode = this.head;
     console.log(currentNode.value);
@@ -37,9 +49,9 @@ class LinkedList {
 
 const list = new LinkedList();
 list.append("dog");
-list.append("cat");
+list.prepend("cat");
 list.append("parrot");
-list.append("hamster");
-list.append("snake");
-list.append("turtle");
+list.prepend("hamster");
+// list.append("snake");
+// list.append("turtle");
 list.print();
