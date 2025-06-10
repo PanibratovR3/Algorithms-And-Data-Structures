@@ -75,6 +75,10 @@ class LinkedList {
     if (this.head === null) return null;
     let previousNode = null;
     let currentNode = this.head;
+    if (currentNode.next === null) {
+      this.head = null;
+      return this;
+    }
     while (currentNode.next) {
       previousNode = currentNode;
       currentNode = currentNode.next;
