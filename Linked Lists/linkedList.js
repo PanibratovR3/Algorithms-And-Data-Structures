@@ -119,17 +119,63 @@ class LinkedList {
     resultString += ` -> null`;
     return resultString;
   }
+
+  insertAt(value, index) {
+    if (this.head === null) return null;
+    if (index === 0) {
+      this.prepend(value);
+      return this;
+    }
+    let newNode = new Node(value);
+    let currentNode = this.head;
+    let previousNode = null;
+    let currentIndex = 0;
+    while (currentNode.next && currentIndex < index) {
+      previousNode = currentNode;
+      currentNode = currentNode.next;
+      currentIndex++;
+    }
+    if (currentNode.next && currentIndex === index) {
+      previousNode.next = newNode;
+      newNode.next = currentNode;
+      return this;
+    }
+    if (!currentNode.next && currentIndex === index) {
+      currentNode.next = newNode;
+      return this;
+    }
+  }
+
+  removeAt(index) {
+    if (this.head === null) return null;
+    if (index === 0) {
+      this.head = this.head.next;
+      return this;
+    }
+    let currentNode = this.head;
+    let previousNode = null;
+    let currentIndex = 0;
+    while (currentNode.next && currentIndex !== index) {
+      previousNode = currentNode;
+      currentNode = currentNode.next;
+      currentIndex++;
+    }
+    if (currentNode.next && currentIndex === index) {
+      previousNode.next = currentNode.next;
+      return this;
+    }
+    if (!currentNode.next && currentIndex === index) {
+      this.pop();
+    }
+  }
 }
 
 const list = new LinkedList();
+
 list.append("dog");
 list.append("cat");
 list.append("parrot");
 list.append("hamster");
 list.append("snake");
 list.append("turtle");
-// console.log(list.size());
-// console.log(list.getTail());
-// console.log(list.contains("fox"));
-// console.log(list.find("dog"));
 console.log(list.toString());
