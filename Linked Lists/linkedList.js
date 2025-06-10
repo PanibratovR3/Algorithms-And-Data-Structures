@@ -35,15 +35,6 @@ class LinkedList {
     return this;
   }
 
-  print() {
-    let currentNode = this.head;
-    console.log(currentNode.value);
-    while (currentNode.next) {
-      currentNode = currentNode.next;
-      console.log(currentNode.value);
-    }
-  }
-
   size() {
     if (this.head === null) return 0;
     let sizeNumber = 1;
@@ -102,6 +93,32 @@ class LinkedList {
     }
     return valueInList;
   }
+
+  find(value) {
+    if (this.head === null) return null;
+    let currentNode = this.head;
+    let valueInList = currentNode.value === value;
+    let currentIndex = 0;
+    while (currentNode.next && !valueInList) {
+      currentNode = currentNode.next;
+      valueInList = currentNode.value === value;
+      currentIndex++;
+    }
+    if (valueInList) return currentIndex;
+    return null;
+  }
+
+  toString() {
+    if (this.head === null) return "null";
+    let currentNode = this.head;
+    let resultString = `( ${currentNode.value} )`;
+    while (currentNode.next) {
+      currentNode = currentNode.next;
+      resultString += ` -> ( ${currentNode.value} )`;
+    }
+    resultString += ` -> null`;
+    return resultString;
+  }
 }
 
 const list = new LinkedList();
@@ -109,10 +126,10 @@ list.append("dog");
 list.append("cat");
 list.append("parrot");
 list.append("hamster");
-// list.append("snake");
-// list.append("turtle");
-console.log(list.size());
-console.log(list.getTail());
-console.log(list.pop());
-console.log(list.contains("fox"));
-// list.print();
+list.append("snake");
+list.append("turtle");
+// console.log(list.size());
+// console.log(list.getTail());
+// console.log(list.contains("fox"));
+// console.log(list.find("dog"));
+console.log(list.toString());
