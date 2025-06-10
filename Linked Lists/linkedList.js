@@ -7,16 +7,16 @@ class Node {
 
 class LinkedList {
   constructor() {
-    this.head = null;
+    this.lLHead = null;
   }
 
   append(value) {
     let node = new Node(value);
-    if (this.head === null) {
-      this.head = node;
+    if (this.lLHead === null) {
+      this.lLHead = node;
       return this;
     }
-    let currentNode = this.head;
+    let currentNode = this.lLHead;
     while (currentNode.next) {
       currentNode = currentNode.next;
     }
@@ -26,19 +26,19 @@ class LinkedList {
 
   prepend(value) {
     let newNode = new Node(value);
-    if (this.head === null) {
-      this.head = newNode;
+    if (this.lLHead === null) {
+      this.lLHead = newNode;
       return this;
     }
-    newNode.next = this.head;
-    this.head = newNode;
+    newNode.next = this.lLHead;
+    this.lLHead = newNode;
     return this;
   }
 
   size() {
-    if (this.head === null) return 0;
+    if (this.lLHead === null) return 0;
     let sizeNumber = 1;
-    let currentNode = this.head;
+    let currentNode = this.lLHead;
     while (currentNode.next) {
       currentNode = currentNode.next;
       sizeNumber++;
@@ -46,13 +46,13 @@ class LinkedList {
     return sizeNumber;
   }
 
-  getHead() {
-    return this.head;
+  head() {
+    return this.lLHead;
   }
 
-  getTail() {
-    if (this.head === null) return null;
-    let currentNode = this.head;
+  tail() {
+    if (this.lLHead === null) return null;
+    let currentNode = this.lLHead;
     while (currentNode.next) {
       currentNode = currentNode.next;
     }
@@ -60,8 +60,8 @@ class LinkedList {
   }
 
   at(index) {
-    if (this.head === null) return null;
-    let currentNode = this.head;
+    if (this.lLHead === null) return null;
+    let currentNode = this.lLHead;
     let currentIndex = 0;
     while (currentNode.next && currentIndex !== index) {
       currentNode = currentNode.next;
@@ -72,11 +72,11 @@ class LinkedList {
   }
 
   pop() {
-    if (this.head === null) return null;
+    if (this.lLHead === null) return null;
     let previousNode = null;
-    let currentNode = this.head;
+    let currentNode = this.lLHead;
     if (currentNode.next === null) {
-      this.head = null;
+      this.lLHead = null;
       return this;
     }
     while (currentNode.next) {
@@ -88,8 +88,8 @@ class LinkedList {
   }
 
   contains(value) {
-    if (this.head === null) return null;
-    let currentNode = this.head;
+    if (this.lLHead === null) return null;
+    let currentNode = this.lLHead;
     let valueInList = currentNode.value === value;
     while (currentNode.next && !valueInList) {
       currentNode = currentNode.next;
@@ -99,8 +99,8 @@ class LinkedList {
   }
 
   find(value) {
-    if (this.head === null) return null;
-    let currentNode = this.head;
+    if (this.lLHead === null) return null;
+    let currentNode = this.lLHead;
     let valueInList = currentNode.value === value;
     let currentIndex = 0;
     while (currentNode.next && !valueInList) {
@@ -113,8 +113,8 @@ class LinkedList {
   }
 
   toString() {
-    if (this.head === null) return "null";
-    let currentNode = this.head;
+    if (this.lLHead === null) return "null";
+    let currentNode = this.lLHead;
     let resultString = `( ${currentNode.value} )`;
     while (currentNode.next) {
       currentNode = currentNode.next;
@@ -125,13 +125,13 @@ class LinkedList {
   }
 
   insertAt(value, index) {
-    if (this.head === null) return null;
+    if (this.lLHead === null) return null;
     if (index === 0) {
       this.prepend(value);
       return this;
     }
     let newNode = new Node(value);
-    let currentNode = this.head;
+    let currentNode = this.lLHead;
     let previousNode = null;
     let currentIndex = 0;
     while (currentNode.next && currentIndex < index) {
@@ -151,12 +151,12 @@ class LinkedList {
   }
 
   removeAt(index) {
-    if (this.head === null) return null;
+    if (this.lLHead === null) return null;
     if (index === 0) {
-      this.head = this.head.next;
+      this.lLHead = this.lLHead.next;
       return this;
     }
-    let currentNode = this.head;
+    let currentNode = this.lLHead;
     let previousNode = null;
     let currentIndex = 0;
     while (currentNode.next && currentIndex !== index) {
