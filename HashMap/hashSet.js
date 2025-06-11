@@ -42,7 +42,7 @@ class HashSet {
     }
 
     bucket.push([key]);
-    this.bucketSize++;
+    this.usedBuckets++;
     this.checkLoadFactor();
   }
 
@@ -59,4 +59,62 @@ class HashSet {
 
     return null;
   }
+
+  has(key) {
+    let index = this.hash(key);
+    const bucket = this.buckets[index];
+    if (bucket.length > 0) {
+      for (const item of bucket) {
+        if (item[0] === key) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
+  remove(key) {
+    let index = this.hash(key);
+    const bucket = this.buckets[index];
+    if (bucket.length > 0) {
+      let indexToDelete = bucket.findIndex((item) => item[0] === key);
+      if (indexToDelete !== -1) {
+        bucket.splice(indexToDelete, 1);
+        this.usedBuckets--;
+        return true;
+      }
+    }
+    return false;
+  }
+
+  length() {
+    return this.buckets.reduce((total, bucket) => total + bucket.length, 0);
+  }
+
+  clear() {
+    this.usedBuckets = 0;
+    this.buckets.map((bucket) => (bucket.length = 0));
+  }
+
+  keys() {
+    const keysArray = [];
+
+    for (const bucket of this.buckets) {
+      if (bucket.length > 0) {
+        for (const item of bucket) {
+          keysArray.push(item[0]);
+        }
+      }
+    }
+
+    return keysArray;
+  }
 }
+
+const test = new HashSet();
+test.set("key 1");
+test.set("key 1");
+console.log(test.get("key 1"));
+console.log(test.has("key 2"));
+console.log(test.buckets);
