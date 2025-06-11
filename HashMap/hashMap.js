@@ -35,7 +35,6 @@ class HashMap {
   set(key, value) {
     let hashCode = this.hash(key);
     let bucket = this.buckets[hashCode];
-    console.log(bucket);
     if (bucket.length > 0) {
       for (const item of bucket) {
         if (item[0] === key) {
@@ -49,8 +48,49 @@ class HashMap {
     this.usedBuckets++;
     this.checkLoadFactor();
   }
+
+  get(key) {
+    let hashCode = this.hash(key);
+    let bucket = this.buckets[hashCode];
+    if (bucket.length > 0) {
+      for (const item of bucket) {
+        if (item[0] === key) {
+          return item[1];
+        }
+      }
+    }
+    return null;
+  }
+
+  has(key) {
+    let hashCode = this.hash(key);
+    let bucket = this.buckets[hashCode];
+    if (bucket.length > 0) {
+      for (const item of bucket) {
+        if (item[0] === key) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  remove(key) {
+    let hashCode = this.hash(key);
+    let bucket = this.buckets[hashCode];
+    if (bucket.length > 0) {
+      let indexToDelete = bucket.findIndex((item) => item[0] === key);
+      if (indexToDelete !== -1) {
+        bucket.splice(indexToDelete, 1);
+        return true;
+      }
+    }
+    return false;
+  }
 }
 
 const test = new HashMap();
 test.set("apple", "red");
+test.set("banana", "yellow");
 console.log(test.buckets);
+console.log(test.remove("fadasd"));
