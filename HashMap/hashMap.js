@@ -87,6 +87,51 @@ class HashMap {
     }
     return false;
   }
+
+  length() {
+    return this.buckets.reduce((total, item) => total + item.length, 0);
+  }
+
+  clear() {
+    this.buckets.map((item) => (item.length = 0));
+    this.usedBuckets = 0;
+  }
+
+  keys() {
+    const keysArray = [];
+    for (const bucket of this.buckets) {
+      if (bucket.length > 0) {
+        for (const item of bucket) {
+          keysArray.push(item[0]);
+        }
+      }
+    }
+    return keysArray;
+  }
+
+  values() {
+    const valuesArray = [];
+    for (const bucket of this.buckets) {
+      if (bucket.length > 0) {
+        for (const item of bucket) {
+          valuesArray.push(item[1]);
+        }
+      }
+    }
+    return valuesArray;
+  }
+
+  entries() {
+    const entriesArray = [];
+    for (const bucket of this.buckets) {
+      if (bucket.length > 0) {
+        for (const item of bucket) {
+          entriesArray.push(item);
+        }
+      }
+    }
+    return entriesArray;
+  }
 }
 
 const test = new HashMap();
@@ -94,3 +139,5 @@ test.set("apple", "red");
 test.set("banana", "yellow");
 console.log(test.buckets);
 console.log(test.remove("fadasd"));
+console.log(test.length());
+console.log(test.entries());
