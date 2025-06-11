@@ -82,7 +82,7 @@ class HashMap {
       let indexToDelete = bucket.findIndex((item) => item[0] === key);
       if (indexToDelete !== -1) {
         bucket.splice(indexToDelete, 1);
-        this.usedBuckets--;
+        if (bucket.length === 0) this.usedBuckets--;
         return true;
       }
     }
