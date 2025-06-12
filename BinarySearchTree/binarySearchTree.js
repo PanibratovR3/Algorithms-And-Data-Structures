@@ -60,6 +60,7 @@ class BinarySearchTree {
     }
     return currentNode;
   }
+
   deleteRecursively(root, value) {
     if (root === null) {
       return root;
@@ -83,6 +84,26 @@ class BinarySearchTree {
     }
     return root;
   }
+
+  find(value) {
+    return this.findRecursively(this.root, value);
+  }
+
+  findRecursively(root, value) {
+    if (root === null) {
+      return null;
+    }
+    if (root.value === value) {
+      return root;
+    }
+    if (value < root.value) {
+      return this.findRecursively(root.left, value);
+    } else if (value > root.value) {
+      return this.findRecursively(root.right, value);
+    }
+    return null;
+  }
+
   prettyPrint = (node, prefix = "", isLeft = true) => {
     if (node === null) {
       return;
@@ -108,5 +129,6 @@ const testTree = new BinarySearchTree([
 testTree.insert(10);
 testTree.insert(17);
 testTree.delete(3);
-testTree.delete(67);
+// testTree.delete(67);
 testTree.prettyPrint(testTree.root);
+console.log(testTree.find(10));
