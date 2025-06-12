@@ -32,6 +32,57 @@ class BinarySearchTree {
     return node;
   }
 
+  insert(value) {
+    this.insertRecursively(this.root, value);
+  }
+
+  insertRecursively(root, value) {
+    if (root === null) {
+      return new TreeNode(value);
+    }
+    if (value < root.value) {
+      root.left = this.insertRecursively(root.left, value);
+    } else if (value > root.value) {
+      root.right = this.insertRecursively(root.right, value);
+    }
+
+    return root;
+  }
+
+  delete(value) {
+    this.deleteRecursively(this.root, value);
+  }
+
+  getSuccessor(currentNode) {
+    currentNode = currentNode.right;
+    while (currentNode !== null && currentNode.left !== null) {
+      currentNode = currentNode.left;
+    }
+    return currentNode;
+  }
+  deleteRecursively(root, value) {
+    if (root === null) {
+      return root;
+    }
+
+    if (root.value > value) {
+      root.left = this.deleteRecursively(root.left, value);
+    } else if (root.value < value) {
+      root.right = this.deleteRecursively(root.right, value);
+    } else {
+      if (root.left === null) {
+        return root.right;
+      }
+      if (root.right === null) {
+        return root.left;
+      }
+
+      let successor = this.getSuccessor(root);
+      root.value = successor.value;
+      root.right = this.deleteRecursively(root.right, successor.value);
+    }
+    return root;
+  }
   prettyPrint = (node, prefix = "", isLeft = true) => {
     if (node === null) {
       return;
@@ -54,4 +105,8 @@ const testTree = new BinarySearchTree([
   1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324,
 ]);
 
+testTree.insert(10);
+testTree.insert(17);
+testTree.delete(3);
+testTree.delete(67);
 testTree.prettyPrint(testTree.root);
