@@ -124,24 +124,51 @@ class BinarySearchTree {
   }
 
   inOrder(node) {
-    if (node === null) return;
-    this.inOrder(node.left);
-    console.log(node.value);
-    this.inOrder(node.right);
+    const results = [];
+    walk(node);
+    function walk(node) {
+      if (node.left) {
+        walk(node.left);
+      }
+      results.push(node.value);
+      if (node.right) {
+        walk(node.right);
+      }
+      return node;
+    }
+    return results;
   }
 
   preOrder(node) {
-    if (node === null) return;
-    console.log(node.value);
-    this.preOrder(node.left);
-    this.preOrder(node.right);
+    const results = [];
+    walk(node);
+    function walk(node) {
+      results.push(node.value);
+      if (node.left) {
+        walk(node.left);
+      }
+      if (node.right) {
+        walk(node.right);
+      }
+      return node;
+    }
+    return results;
   }
 
   postOrder(node) {
-    if (node === null) return;
-    this.postOrder(node.left);
-    this.postOrder(node.right);
-    console.log(node.value);
+    const results = [];
+    walk(node);
+    function walk(node) {
+      if (node.left) {
+        walk(node.left);
+      }
+      if (node.right) {
+        walk(node.right);
+      }
+      results.push(node.value);
+      return node;
+    }
+    return results;
   }
 
   height(node) {
@@ -216,11 +243,11 @@ testTree.delete(3);
 testTree.prettyPrint(testTree.root);
 // console.log(testTree.find(10));
 console.log(testTree.levelOrderRecursively());
-// testTree.inOrder(testTree.root);
-// console.log("...");
-// testTree.preOrder(testTree.root);
-// console.log("...");
-// testTree.postOrder(testTree.root);
-// console.log("...");
+console.log(testTree.inOrder(testTree.root));
+console.log("...");
+console.log(testTree.preOrder(testTree.root));
+console.log("...");
+console.log(testTree.postOrder(testTree.root));
+console.log("...");
 console.log(testTree.height(testTree.find(8)));
 testTree.depth(testTree.find(7), testTree.root);
