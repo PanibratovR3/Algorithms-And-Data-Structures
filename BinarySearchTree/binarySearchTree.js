@@ -175,7 +175,7 @@ class BinarySearchTree {
     let highestNumber = 0;
     traverse(node, 0);
     function traverse(node, number) {
-      if (!node.left && !node.right) {
+      if (!node?.left && !node?.right) {
         if (number > highestNumber) {
           return (highestNumber = number);
         } else {
@@ -214,6 +214,30 @@ class BinarySearchTree {
     }
   }
 
+  isBalanced(node) {
+    if (node === null) {
+      return true;
+    }
+    let leftHeight = this.height(node.left);
+    let rightHeight = this.height(node.right);
+
+    if (
+      Math.abs(leftHeight - rightHeight) <= 1 &&
+      this.isBalanced(node.left) === true &&
+      this.isBalanced(node.right) === true
+    ) {
+      return true;
+    }
+
+    return false;
+  }
+
+  reBalance() {
+    const newTreeArray = this.preOrder(this.root);
+    const newTreeArraySorted = newTreeArray.sort((a, b) => a - b);
+    this.root = this.buildTree(newTreeArraySorted);
+  }
+
   prettyPrint = (node, prefix = "", isLeft = true) => {
     if (node === null) {
       return;
@@ -239,7 +263,7 @@ const testTree = new BinarySearchTree([
 testTree.insert(10);
 testTree.insert(17);
 testTree.delete(3);
-// testTree.delete(67);
+testTree.delete(67);
 testTree.prettyPrint(testTree.root);
 // console.log(testTree.find(10));
 console.log(testTree.levelOrderRecursively());
@@ -251,3 +275,7 @@ console.log(testTree.postOrder(testTree.root));
 console.log("...");
 console.log(testTree.height(testTree.find(8)));
 testTree.depth(testTree.find(7), testTree.root);
+
+console.log(testTree.isBalanced(testTree.root));
+testTree.reBalance();
+console.log(testTree.isBalanced(testTree.root));
