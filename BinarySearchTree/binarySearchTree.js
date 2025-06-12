@@ -123,6 +123,27 @@ class BinarySearchTree {
     return result;
   }
 
+  inOrder(node) {
+    if (node === null) return;
+    this.inOrder(node.left);
+    console.log(node.value);
+    this.inOrder(node.right);
+  }
+
+  preOrder(node) {
+    if (node === null) return;
+    console.log(node.value);
+    this.preOrder(node.left);
+    this.preOrder(node.right);
+  }
+
+  postOrder(node) {
+    if (node === null) return;
+    this.postOrder(node.left);
+    this.postOrder(node.right);
+    console.log(node.value);
+  }
+
   prettyPrint = (node, prefix = "", isLeft = true) => {
     if (node === null) {
       return;
@@ -152,3 +173,8 @@ testTree.delete(3);
 testTree.prettyPrint(testTree.root);
 // console.log(testTree.find(10));
 console.log(testTree.levelOrderRecursively());
+testTree.inOrder(testTree.root);
+console.log("...");
+testTree.preOrder(testTree.root);
+console.log("...");
+testTree.postOrder(testTree.root);
