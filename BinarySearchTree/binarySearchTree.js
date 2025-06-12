@@ -256,26 +256,26 @@ class BinarySearchTree {
   };
 }
 
-const testTree = new BinarySearchTree([
-  1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324,
-]);
+// const testTree = new BinarySearchTree([
+//   1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324,
+// ]);
 
-testTree.insert(10);
-testTree.insert(17);
-testTree.delete(3);
-testTree.delete(67);
-testTree.prettyPrint(testTree.root);
+// testTree.insert(10);
+// testTree.insert(17);
+// testTree.delete(3);
+// testTree.delete(67);
+// testTree.prettyPrint(testTree.root);
 // console.log(testTree.find(10));
-console.log(testTree.levelOrderRecursively());
-console.log(testTree.inOrder(testTree.root));
-console.log("...");
-console.log(testTree.preOrder(testTree.root));
-console.log("...");
-console.log(testTree.postOrder(testTree.root));
-console.log("...");
-console.log(testTree.height(testTree.find(8)));
-testTree.depth(testTree.find(7), testTree.root);
+// console.log(testTree.levelOrderRecursively());
+// console.log(testTree.inOrder(testTree.root));
+// console.log("...");
+// console.log(testTree.preOrder(testTree.root));
+// console.log("...");
+// console.log(testTree.postOrder(testTree.root));
+// console.log("...");
+// console.log(testTree.height(testTree.find(8)));
+// testTree.depth(testTree.find(7), testTree.root);
 
-console.log(testTree.isBalanced(testTree.root));
-testTree.reBalance();
-console.log(testTree.isBalanced(testTree.root));
+// console.log(testTree.isBalanced(testTree.root));
+// testTree.reBalance();
+// console.log(testTree.isBalanced(testTree.root));
