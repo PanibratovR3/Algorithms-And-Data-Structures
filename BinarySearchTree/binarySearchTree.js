@@ -104,6 +104,25 @@ class BinarySearchTree {
     return null;
   }
 
+  levelOrderRecursively() {
+    const result = [];
+    return this.levelOrderRecursivelyUtil(this.root, 0, result);
+  }
+
+  levelOrderRecursivelyUtil(root, level, result) {
+    if (root === null) {
+      return;
+    }
+    if (result.length <= level) {
+      result.push([]);
+    }
+    result[level].push(root.value);
+
+    this.levelOrderRecursivelyUtil(root.left, level + 1, result);
+    this.levelOrderRecursivelyUtil(root.right, level + 1, result);
+    return result;
+  }
+
   prettyPrint = (node, prefix = "", isLeft = true) => {
     if (node === null) {
       return;
@@ -131,4 +150,5 @@ testTree.insert(17);
 testTree.delete(3);
 // testTree.delete(67);
 testTree.prettyPrint(testTree.root);
-console.log(testTree.find(10));
+// console.log(testTree.find(10));
+console.log(testTree.levelOrderRecursively());
