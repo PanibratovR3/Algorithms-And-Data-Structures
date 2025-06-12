@@ -144,6 +144,49 @@ class BinarySearchTree {
     console.log(node.value);
   }
 
+  height(node) {
+    let highestNumber = 0;
+    traverse(node, 0);
+    function traverse(node, number) {
+      if (!node.left && !node.right) {
+        if (number > highestNumber) {
+          return (highestNumber = number);
+        } else {
+          return;
+        }
+      }
+      number++;
+      if (node.left) {
+        traverse(node.left, number);
+      }
+      if (node.right) {
+        traverse(node.right, number);
+      }
+    }
+    return highestNumber;
+  }
+
+  depth(targetNode, treeNode) {
+    let depthNumber = 0;
+    findNode(treeNode, 0);
+    console.log(
+      `Depth of node with value ${targetNode.value} is ${depthNumber}`
+    );
+    function findNode(node, number) {
+      if (node === targetNode) {
+        return (depthNumber = number);
+      }
+      number++;
+      if (node.left) {
+        findNode(node.left, number);
+      }
+      if (node.right) {
+        findNode(node.right, number);
+      }
+      return;
+    }
+  }
+
   prettyPrint = (node, prefix = "", isLeft = true) => {
     if (node === null) {
       return;
@@ -173,8 +216,11 @@ testTree.delete(3);
 testTree.prettyPrint(testTree.root);
 // console.log(testTree.find(10));
 console.log(testTree.levelOrderRecursively());
-testTree.inOrder(testTree.root);
-console.log("...");
-testTree.preOrder(testTree.root);
-console.log("...");
-testTree.postOrder(testTree.root);
+// testTree.inOrder(testTree.root);
+// console.log("...");
+// testTree.preOrder(testTree.root);
+// console.log("...");
+// testTree.postOrder(testTree.root);
+// console.log("...");
+console.log(testTree.height(testTree.find(8)));
+testTree.depth(testTree.find(7), testTree.root);
