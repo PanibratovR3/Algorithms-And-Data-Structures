@@ -19,7 +19,7 @@ class Queue {
 class ChessNode {
   constructor(position) {
     this.position = position;
-    this.parent = null;
+    this.previousNode = null;
     this.distance = null;
   }
 }
@@ -42,14 +42,14 @@ function isWithinBoard(x, y) {
   return x >= 0 && x < SIZE && y >= 0 && y < SIZE;
 }
 
-function notParent(x, y, parent) {
-  return !(parent.position[0] === x && parent.position[1] === y);
+function notpreviousNode(x, y, previousNode) {
+  return !(previousNode.position[0] === x && previousNode.position[1] === y);
 }
 
-function addNode(x, y, parent) {
+function addNode(x, y, previousNode) {
   const node = new ChessNode([x, y]);
-  node.parent = parent;
-  node.distance = node.parent ? node.parent.distance + 1 : 0;
+  node.previousNode = previousNode;
+  node.distance = node.previousNode ? node.previousNode.distance + 1 : 0;
   queue.enqueue(node);
 }
 
@@ -70,7 +70,7 @@ function knightMoves(start, end) {
       x = firstNode.position[0] + move[0];
       y = firstNode.position[1] + move[1];
 
-      if (isWithinBoard(x, y) && notParent(x, y, firstNode)) {
+      if (isWithinBoard(x, y) && notpreviousNode(x, y, firstNode)) {
         addNode(x, y, firstNode);
       }
     }
@@ -84,7 +84,7 @@ function logPath(finalNode) {
   let node = finalNode;
   for (let i = 0; i < steps + 1; i++) {
     path.push(node.position);
-    node = node.parent;
+    node = node.previousNode;
   }
   console.log(`Finished in ${steps}. The path is:`);
   path = path.reverse();
